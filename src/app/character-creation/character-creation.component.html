@@ -1,0 +1,46 @@
+<h1> Choose your class</h1>
+<div class="grid-container">
+    <div class="first">
+        <mat-card class="card">
+            <mat-card-header
+            class="header"
+            >Knight</mat-card-header>
+            <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</mat-card-content>
+                <button mat-fab extended color="primary">
+                    I choose this path!
+                  </button>
+        </mat-card>
+    </div>
+    <div class="cards" >
+        <mat-card class="card2">
+            <mat-card-header
+            class="header"
+            >Moss Witch</mat-card-header>
+            <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</mat-card-content>
+            
+            <button mat-fab extended color="primary">
+                I choose this path!
+              </button>
+        </mat-card>
+        
+        <mat-card class="card2">
+            <mat-card-header
+            class="header"
+            >Rogue</mat-card-header>
+            <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</mat-card-content>
+            <button mat-fab extended color="primary">
+                I choose this path!
+              </button>
+        </mat-card>
+    </div>
+    <mat-form-field class="field">
+        <mat-label>What is your name?</mat-label>
+        <input matInput type="text" [(ngModel)]="value">
+      </mat-form-field>
+      <div
+      class="routes"
+      >
+        <a class="button2 a" routerLink="/hehl">No one will miss me.</a>  
+        <a class="button2 b" routerLink="/login-register">I have people waiting at home for me.</a>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+  <div class="main"  >
+    <h1>Kap</h1>
+    <div *ngIf="undecided; else elseof">
+        <p>Kap is the largest of the many villages and settlements along the coast of the Stirring Sea. 
+           The people here are comparably friendly and open minded, because they know that they depend on the trade with adventurers and travelers.
+        </p>
+        <button  mat-raised-button color="primary" class="choice"
+    type="button"
+    (click)="onEditClick(m1.first)"
+    >{{m1.first}}</button>
+    <button  mat-raised-button color="primary" class="choice"
+    (click)="onEditClick(m1.second)"
+    >{{m1.second}}</button>
+    <button  mat-raised-button color="primary" class="choice"
+    (click)="onEditClick(m1.third)"
+    >{{m1.third}}</button>
+    </div>
+    
+    <ng-template #elseof>
+        <p>{{message}}</p>
+        <p>{{message}}</p>
+        <p>{{message}}</p>
+        <h1>{{posts[0].monsterName}}</h1>
+        <button mat-raised-button color="primary"
+        (click)="onLeave()"
+        >Leave</button>
+    </ng-template>
+
+    <div class="router">
+        <a class="button" routerLink="/">Back To Home</a>
+     </div>
+</div>
