@@ -1,28 +1,8 @@
-/* 
-.card {
-    border-style: solid;
-    border-width: 5px;
-    border-color: grey;
-    color: red;
-    margin-bottom: 1px;
-    height: 25em;
-    width: 25em;
-   text-align: center;
-  }
-  
-.header {
-    border-style: solid;
-    border-width: 5px;
-    border-color: rgb(16, 10, 10);
-}
-*/
 .cards {
-    /* margin-top: 50px; */
     display: flex;
     flex-direction: row;
     margin-left: 16%;
 } 
-
 
 .first {
     width: 50%;
@@ -44,7 +24,6 @@
     margin: 5px;
     width: 40%;  
 }
-
 
 h1 {
     margin-top: 50px;
@@ -82,4 +61,3 @@ h1 {
 .b {
     margin-left: 5px;
 }
-  
