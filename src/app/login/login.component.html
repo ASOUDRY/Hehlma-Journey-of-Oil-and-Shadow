@@ -1,0 +1,16 @@
+<mat-form-field appearance="fill">
+    <mat-label>UserName</mat-label>
+    <input matInput [(ngModel)]="username" >
+</mat-form-field>
+ 
+<mat-form-field appearance="fill">
+    <mat-label>Password</mat-label>
+    <input matInput [(ngModel)]="password">
+</mat-form-field>
+<button 
+(click)="submit()"
+mat-fab extended color="primary">
+    Login
+  </button>
+
+<p>This is your {{username}} this is your {{password}}</p>
