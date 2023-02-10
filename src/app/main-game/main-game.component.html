@@ -1,32 +1,59 @@
-  <div class="main"  >
-    <h1>Kap</h1>
+  <div class="main">
+
+<div *ngIf="posts !== undefined else placeholder">
+    <h1>{{posts[0].lName}}</h1>
     <div *ngIf="undecided; else elseof">
-        <p>Kap is the largest of the many villages and settlements along the coast of the Stirring Sea. 
-           The people here are comparably friendly and open minded, because they know that they depend on the trade with adventurers and travelers.
+        <p>{{posts[0].lDescription}}
         </p>
         <button  mat-raised-button color="primary" class="choice"
     type="button"
     (click)="onEditClick(m1.first)"
     >{{m1.first}}</button>
     <button  mat-raised-button color="primary" class="choice"
-    (click)="onEditClick(m1.second)"
+    (click)="onRouting()"
     >{{m1.second}}</button>
     <button  mat-raised-button color="primary" class="choice"
     (click)="onEditClick(m1.third)"
     >{{m1.third}}</button>
     </div>
-    
     <ng-template #elseof>
-        <p>{{message}}</p>
-        <p>{{message}}</p>
-        <p>{{message}}</p>
-        <h1>{{posts[0].monsterName}}</h1>
-        <button mat-raised-button color="primary"
-        (click)="onLeave()"
-        >Leave</button>
-    </ng-template>
 
+        <div *ngIf="notShopping else Shopping">
+            <p>{{message}}</p>
+            <p>{{action}}</p>
+    
+            <button mat-raised-button color="primary"
+            (click)="onAction('Shopping')"
+            >Shop for goods</button>
+    
+            <button mat-raised-button color="primary"
+            (click)="onAction('Chatting')"
+            >Chat with {{posts[0].npcType}} </button>
+    
+            <button mat-raised-button color="primary"
+            (click)="onLeave()"
+            >Leave</button>
+        </div>
+
+        <ng-template #Shopping>
+    <div *ngIf="shopping else chatting"></div>
+            
+            <app-shopping
+            (backToOption)="reverse($event)"
+            ></app-shopping>
+        <ng-template #chatting>
+            <app-dialogue
+            (backToOption)="reverse($event)"
+            ></app-dialogue>
+            </ng-template>
+        </ng-template>
+    </ng-template>
+</div>
+  
+<ng-template #placeholder>
+    <h1>Fetching your location please standbye.</h1>
     <div class="router">
         <a class="button" routerLink="/">Back To Home</a>
      </div>
+</ng-template>  
 </div>
