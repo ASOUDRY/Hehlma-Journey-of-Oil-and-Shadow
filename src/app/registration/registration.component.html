@@ -1,0 +1,110 @@
+<div *ngIf="condition else elseBlock">
+  <h1>Tell us some information about yourself</h1>
+    <div class="fields" >
+        <mat-form-field class="field">
+            <mat-label>What is your email?</mat-label>
+            <input matInput type="text" [(ngModel)]="email">
+        </mat-form-field>
+        <mat-form-field class="field">
+            <mat-label>What is your username?</mat-label>
+            <input matInput type="text" [(ngModel)]="username">
+        </mat-form-field>
+        <mat-form-field class="field">
+            <mat-label>What is your password?</mat-label>
+            <input matInput type="text" [(ngModel)]="password">
+        </mat-form-field>
+    </div>
+   
+<h2>What name do you go by?</h2>
+
+<div class="fields" >
+    <mat-form-field class="field">
+        <mat-label>Character Name</mat-label>
+        <input matInput type="text" [(ngModel)]="character">
+    </mat-form-field>
+</div>
+
+  <h1> Choose your class</h1>
+<div class="grid-container">
+    <div class="first">
+        <mat-card class="card">
+            <mat-card-header
+            class="header"
+            >Knight</mat-card-header>
+            <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</mat-card-content>
+                <button (click)="classChoice('Knight')" mat-fab extended color="primary">
+                    I choose this path!
+                  </button>
+        </mat-card>
+    </div>
+    <div class="cards" >
+        <mat-card class="card2">
+            <mat-card-header
+            class="header"
+            >Moss Witch</mat-card-header>
+            <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</mat-card-content>
+            
+            <button 
+            (click)="classChoice('Witch')"
+            mat-fab extended color="primary">
+                I choose this path!
+              </button>
+        </mat-card>
+        
+        <mat-card class="card2">
+            <mat-card-header
+            class="header"
+            >Rogue</mat-card-header>
+            <mat-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</mat-card-content>
+            <button 
+            (click)="classChoice('Rogue')"
+            mat-fab extended color="primary">
+                I choose this path!
+              </button>
+        </mat-card>
+    </div>
+</div>
+
+<button
+mat-fab extended color="primary"
+(click)="generateTicket()" >Generate Ticket</button>
+
+</div>
+<ng-template #elseBlock>
+    <div *ngIf="!dataSubmission else submitted">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>Type of Data</th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Your Data </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    <h1>Is this information correct?</h1>
+        <button
+    mat-fab extended color="primary"
+    (click)="registration()" >Yes complete character creation</button>
+    <button
+    mat-fab extended color="primary"
+    (click)="generateTicket()"> No take me back</button>
+    </div>
+    <ng-template #submitted> 
+
+        <div *ngIf="acceptedstatus else rejected">
+            <h1>Submission complete</h1>
+        </div>
+
+
+        <ng-template #rejected >
+            <h1>The username you selected is not available </h1>
+        </ng-template>
+       
+        <button routerLink="/hehl">Begin adventure</button>
+    </ng-template>
+</ng-template>
