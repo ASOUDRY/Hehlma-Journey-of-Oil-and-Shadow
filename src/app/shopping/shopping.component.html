@@ -1,0 +1,30 @@
+<p>shopping works!</p>
+<div *ngFor="let item of items">
+<input type="checkbox" id="inventory"
+
+(change)="onCheckboxChange($event, item.price, item.coinage)"
+>
+<label for="inventory">{{item.name}}: {{item.price}} {{item.coinage}}</label>
+</div>
+
+<div *ngIf="isSilvered else placeholder">
+
+    <div *ngIf="change != 0 else noChange">
+        <p>Your current total is {{price}} silver and {{change}} copper </p>
+    </div>
+
+    <ng-template #noChange>
+        <p>Your current total is {{price}} silver</p> 
+    </ng-template>
+
+  
+</div>
+
+<ng-template #placeholder>
+    <p>Your current total is {{price}} copper </p>
+</ng-template>
+
+<button mat-raised-button color="primary"(click)="onLeave()" >Purchase the existing items. </button>
+
+
+<button mat-raised-button color="primary"(click)="onLeave()" >{{leave}}</button>
