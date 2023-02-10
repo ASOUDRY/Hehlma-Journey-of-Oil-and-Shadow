@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { MainGameComponent } from './main-game/main-game.component';
 import { CharacterCreationComponent } from './character-creation/character-creation.component';
-import { LoginRegistrationComponent } from './login-registration/login-registration.component';
+
+import { AdventureComponent } from './adventure/adventure.component';
 
 const routes: Routes = [
   { path: 'hehl', component:MainGameComponent},
   { path: 'character', component:CharacterCreationComponent},
-  { path: 'login-register', component:LoginRegistrationComponent},
+
+  {path: 'adventure/:name', component:AdventureComponent},
   { path: '**', component:LandingPageComponent}
 ];
 
