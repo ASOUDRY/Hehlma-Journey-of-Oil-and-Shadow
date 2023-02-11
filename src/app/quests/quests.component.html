@@ -1,0 +1,17 @@
+<div *ngIf="posts !== undefined else placeholder">
+
+    <p>Lorem Ipsum Morbidium Give Idium</p>
+
+</div>
+
+<ng-template #placeholder>
+    <h1>The {{giver}} scrarches his chin.</h1>
+</ng-template>  
+
+<button mat-raised-button color="primary">Do you have any quests for me?</button>
+
+<button mat-raised-button color="primary"(click)="onLeave()" >{{leave}}</button>
+
+<div class="router">
+    <a class="button" routerLink="/">Back To Home</a>
+</div>
