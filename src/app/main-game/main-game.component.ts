@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { ServiceService } from '../services/service.service';
 import { Messages } from '../interfaces/messages';
 import { Router } from '@angular/router';
-import { getLocaleDateFormat } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { FetchPlayerPayload } from '../interfaces/fetch-player-payload';
 import { CharacterSheet } from '../interfaces/character-sheet';
@@ -14,12 +13,15 @@ import { CharacterSheet } from '../interfaces/character-sheet';
 })
 export class MainGameComponent {
   posts : any;
+  data : any
   name: any;
   tests: any;
+  message = "";
   action: string = "";
-  notShopping: boolean = true;
   storedObject: any;
   receive: any;
+  undecided = true;
+  shopping = false;
   player: CharacterSheet = {
     name: "",
     attack: 0,
@@ -33,13 +35,18 @@ export class MainGameComponent {
     inventory: []
   }
 
+  m1 : Messages = {
+    first : "Shop",
+    second : "Adventure",
+    third :  "Chat with Locals" 
+  }
+
   constructor(private httpService: ServiceService, private router: Router) { }
   ngOnInit() {
-
     const storedObjectString = sessionStorage.getItem("LoginCredentials");
     console.log(storedObjectString)
     if (storedObjectString) {
-    this.storedObject = JSON.parse(storedObjectString);
+      this.storedObject = JSON.parse(storedObjectString);
     }
     console.log(this.storedObject);
     this.getDataFromApi()
@@ -48,7 +55,6 @@ export class MainGameComponent {
   async getDataFromApi() {
     try {
       const payload: FetchPlayerPayload = this.storedObject;
-
       const response = await firstValueFrom(this.httpService.getPlayer(this.storedObject))
       console.log(response);
       this.receive = response;
@@ -57,14 +63,14 @@ export class MainGameComponent {
       this.player.defense = this.receive.defense;
       this.player.health = this.receive.hitpoints;
       this.player.class = this.receive.cClass;
-        for (let i = 0; i  < this.receive.inventory.length; i++) {
+      for (let i = 0; i  < this.receive.inventory.length; i++) {
           this.player.inventory[i] = {
             name: this.receive.inventory[i].name,
             description: this.receive.inventory[i].description,
             magical: this.receive.inventory[i].magical,
             quantity: this.receive.inventory[i].quantity
           }
-        }
+      }
       this.player.skill = this.receive.skill;
       console.log(this.player)
     
@@ -74,29 +80,20 @@ export class MainGameComponent {
     try {
       const response = await firstValueFrom(this.httpService.getLocation('Kap'))
       this.posts = response; 
+      this.data = this.posts;
       console.log(this.posts);
     } catch (error) {
       console.log(error);
     }
   }
 
-m1 : Messages = {
-  first : "Shop",
-  second : "Adventure",
-  third :  "Chat with Locals"
-  
-}
-  message = "";
-  undecided = true;
-  shopping : boolean = false;
- 
   onEditClick(value: string) {
     console.log(value);
     this.undecided = !this.undecided;
     if (value == this.m1.first) {
-    this.message = `You find the ${this.posts[0].npcType} ${this.posts[0].npcName}.${this.posts[0].npcInfo}`;
-    this.action = "What would you like to do?";
-    console.log(value);
+      this.message = `You find the ${this.posts[0].npcType} ${this.posts[0].npcName}.${this.posts[0].npcInfo}`;
+      this.action = "What would you like to do?";
+      console.log(value);
     }
     else if (value == this.m1.second) {
       this.message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -107,26 +104,11 @@ m1 : Messages = {
     }
   }
 
-onLeave() {
-  this.undecided = !this.undecided;
-}
-
-onRouting() {
-  this.router.navigateByUrl(`/adventure/${this.posts[0].next}`);
-}
-
-onAction(value: string) {
-  this.notShopping = !this.notShopping;
-  if (value === 'Shopping') {
-    this.shopping = true;
+  reverse() {
+    this.undecided = !this.undecided;
   }
-  else {
-    this.shopping = false;
+
+  onRouting() {
+    this.router.navigateByUrl(`/adventure/${this.posts[0].next}`);
   }
-}
-
-reverse(value: boolean) {
-this.notShopping = value
-}
-
 }
