@@ -24,6 +24,9 @@ import { DialogueComponent } from './dialogue/dialogue.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { QuestsComponent } from './quests/quests.component';
+import { MerchantsComponent } from './merchants/merchants.component';
+import { LocationComponent } from './location/location.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { RegistrationComponent } from './registration/registration.component';
     ShoppingComponent,
     LoginComponent,
     RegistrationComponent,
+    QuestsComponent,
+    MerchantsComponent,
+    LocationComponent,
   ],
   imports: [
     BrowserModule,
