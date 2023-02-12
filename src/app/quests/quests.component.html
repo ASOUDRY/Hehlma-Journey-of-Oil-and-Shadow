@@ -1,14 +1,17 @@
 <div *ngIf="posts !== undefined else placeholder">
-
-    <p>Lorem Ipsum Morbidium Give Idium</p>
-
+    <div *ngIf="deliberating else decided">
+        <p>{{this.posts.details}}</p>
+        <button mat-raised-button color="primary" (click)="onAccept(true)" >Accept</button>
+        <button mat-raised-button color="primary" (click)="onAccept(false)" >Refuse</button>
+    </div>
+    <ng-template #decided>
+        <p>{{this.response}}</p>
+    </ng-template>
 </div>
 
 <ng-template #placeholder>
-    <h1>The {{giver}} scrarches his chin.</h1>
+    <h1>{{giver}} scrarches his chin.</h1>
 </ng-template>  
-
-<button mat-raised-button color="primary">Do you have any quests for me?</button>
 
 <button mat-raised-button color="primary"(click)="onLeave()" >{{leave}}</button>
 
