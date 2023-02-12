@@ -15,10 +15,16 @@ export class ServiceService {
  // private url = 'https://testapp-as.azurewebsites.net/WeatherForecast';
 //  private locationurl = 'http://localhost:5001/Location/Royal%20City
 
+// private quest1 = { quest: "A kid was lost at the stirring sea. Can you go fetch him for me.", rescue, lowgrade }
+
   constructor(private http: HttpClient) { }
 
   getPosts() {
     return this.http.get(this.url);
+  }
+
+  getQuest(key1: string, key2: string) {
+    return this.http.get(`http://localhost:5001/api/Quest/${key1}/${key2}`)
   }
 
   getLocation(key: string) {
