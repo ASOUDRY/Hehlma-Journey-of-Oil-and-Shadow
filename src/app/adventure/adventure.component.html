@@ -1,11 +1,54 @@
 <h1>{{name}}</h1>
 
-<p>{{posts[0].lDescription}}</p>
+<p>{{data.lDescription}}</p>
 
-<h2>Adventure Time</h2>
+<h2>What would you like to do?</h2>
 
-<p>{{posts[0].adventure}}</p>
+<div *ngIf="decision else decided">
 
-<div class="router">
-    <a class="button" routerLink="/hehl">Flee Home like the cowards you are!</a>
+    <button (click)="decisionMade(true)" >Would you like to pursue your quest?</button>
+    <button (click)="decisionMade(false)">I'd like to explore the banks of the water.</button>
+
+    <button (click)="automove()" >auto-move</button>
+
 </div>
+
+<ng-template #decided>
+    <div *ngIf="exploration else Quest">
+        <div *ngIf="explorationChoice else options">
+            <div *ngIf="wait else combat">
+                <div *ngIf="isWaiting else stealth">
+                    <p>{{waitingVariable}}</p>
+                    <p>{{v1}}</p>
+                    <button (click)="acquireTreasure(newItem)" >{{v0}}</button>
+                    <button>{{v2}}</button>
+                    <div *ngIf="shiny">
+                        <p>{{item}}</p>
+                    </div>
+                 
+                </div>
+                <ng-template #stealth>
+                    <p>Stealth the Whale</p>
+                </ng-template>
+            </div>
+            <ng-template #combat>
+                <p>Whale Fight Club </p>
+            </ng-template>
+
+        </div>
+        <ng-template #options>
+            <p>{{data.adventure}}</p>
+            <button (click)="explore(1)" >Wait and see what to do</button>
+            <button (click)="explore(2)" >Attempt to sneak past the beast</button>
+            <button (click)="explore(3)" >Fight</button>
+            <button (click)="escape()">Flee.</button>
+        </ng-template>
+    </div>
+
+    <ng-template #Quest>
+        <p>{{data.onArrival}}</p>
+        <p>{{data.inCombat}}</p>
+        <p>{{data.afterCombat}}</p>
+    </ng-template>
+
+</ng-template>
