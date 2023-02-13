@@ -32,7 +32,8 @@ export class MainGameComponent {
     bonusAttack: 0,
     bonusDefense: 0,
     bonusHealth: 0,
-    inventory: []
+    inventory: [],
+    Quest: ""
   }
 
   m1 : Messages = {
@@ -110,5 +111,9 @@ export class MainGameComponent {
 
   onRouting() {
     this.router.navigateByUrl(`/adventure/${this.posts[0].next}`);
+  }
+
+  ngOnDestroy() {
+    sessionStorage.setItem('player', JSON.stringify(this.player));
   }
 }
