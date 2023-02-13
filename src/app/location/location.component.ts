@@ -22,15 +22,18 @@ export class LocationComponent {
 
   @Output() backToOption = new EventEmitter<void>();
 
-     onLeave() {
+    onLeave() {
     this.backToOption.emit()
   }
 
   drinking(value: boolean) {
-    if (value = true) {
+    console.log(value)
+    if (value) {
+      console.log("You picked the true option")
       this.Drinking = true;
     }
     else {
+      console.log("You picked the fakse option")
       this.Drinking = false
     }
     this.undecided = !this.undecided
