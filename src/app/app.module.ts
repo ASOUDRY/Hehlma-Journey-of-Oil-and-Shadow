@@ -27,6 +27,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { QuestsComponent } from './quests/quests.component';
 import { MerchantsComponent } from './merchants/merchants.component';
 import { LocationComponent } from './location/location.component';
+import { CombatComponent } from './combat/combat.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LocationComponent } from './location/location.component';
     QuestsComponent,
     MerchantsComponent,
     LocationComponent,
+    CombatComponent,
   ],
   imports: [
     BrowserModule,
