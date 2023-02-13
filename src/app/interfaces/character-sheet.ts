@@ -11,4 +11,5 @@ export interface CharacterSheet {
     bonusDefense: number
     bonusHealth: number
     inventory: Inventory[]
+    Quest: string
 }
