@@ -6,6 +6,8 @@
     </div>
     <ng-template #decided>
         <p>{{this.response}}</p>
+        <button mat-raised-button color="primary" (click)="onRouting('Stirring Sea')" >Fast Track to Quest Location</button>
+        <button mat-raised-button color="primary" (click)="onAccept(false)" >Return to what your doing</button>
     </ng-template>
 </div>
 
@@ -13,8 +15,6 @@
     <h1>{{giver}} scrarches his chin.</h1>
 </ng-template>  
 
-<button mat-raised-button color="primary"(click)="onLeave()" >{{leave}}</button>
-
 <div class="router">
-    <a class="button" routerLink="/">Back To Home</a>
+    <a class="button" routerLink="/hehl">Back To Home</a>
 </div>
