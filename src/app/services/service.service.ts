@@ -54,7 +54,7 @@ export class ServiceService {
 
   private data: any;
 
-  setData(data: any) {
+  updatePlayer(data: any) {
     this.data = data;
   }
 
@@ -65,7 +65,7 @@ export class ServiceService {
     }
   }
 
-  getData() {
+  retreivePlayer() {
     return this.data;
   }
 }
