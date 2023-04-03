@@ -23,17 +23,18 @@ export class MainGameComponent {
   undecided = true;
   shopping = false;
   player: CharacterSheet = {
-    name: "",
+    username: "",
+    characterName: "",
+    class: "",
     attack: 0,
     defense: 0,
     health: 0,
     skill: "",
-    class: "",
-    bonusAttack: 0,
-    bonusDefense: 0,
-    bonusHealth: 0,
     inventory: [],
-    Quest: ""
+    quest: ""
+    // bonusAttack: 0,
+    // bonusDefense: 0,
+    // bonusHealth: 0,
   }
 
   m1 : Messages = {
@@ -45,11 +46,9 @@ export class MainGameComponent {
   constructor(private httpService: ServiceService, private router: Router) { }
   ngOnInit() {
     const storedObjectString = sessionStorage.getItem("LoginCredentials");
-    console.log(storedObjectString)
     if (storedObjectString) {
       this.storedObject = JSON.parse(storedObjectString);
     }
-    console.log(this.storedObject);
     this.getDataFromApi()
   }
 
@@ -57,9 +56,9 @@ export class MainGameComponent {
     try {
       const payload: FetchPlayerPayload = this.storedObject;
       const response = await firstValueFrom(this.httpService.getPlayer(this.storedObject))
-      console.log(response);
       this.receive = response;
-      this.player.name = this.receive.characterName;
+      this.player.username = this.receive.username;
+      this.player.characterName = this.receive.characterName
       this.player.attack = this.receive.attack;
       this.player.defense = this.receive.defense;
       this.player.health = this.receive.hitpoints;
@@ -73,28 +72,23 @@ export class MainGameComponent {
           }
       }
       this.player.skill = this.receive.skill;
-      console.log(this.player)
-    
     } catch (error) {
       console.log(error);
     }
     try {
-      const response = await firstValueFrom(this.httpService.getLocation('Kap'))
+      const response = await firstValueFrom(this.httpService.getLocation('kap'))
       this.posts = response; 
       this.data = this.posts;
-      console.log(this.posts);
     } catch (error) {
       console.log(error);
     }
   }
 
   onEditClick(value: string) {
-    console.log(value);
     this.undecided = !this.undecided;
     if (value == this.m1.first) {
       this.message = `You find the ${this.posts[0].npcType} ${this.posts[0].npcName}.${this.posts[0].npcInfo}`;
       this.action = "What would you like to do?";
-      console.log(value);
     }
     else if (value == this.m1.second) {
       this.message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -115,5 +109,6 @@ export class MainGameComponent {
 
   ngOnDestroy() {
     sessionStorage.setItem('player', JSON.stringify(this.player));
+  //  this.httpService.updatePlayer(this.player);
   }
 }
