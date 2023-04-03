@@ -12,17 +12,18 @@ import { CharacterSheet } from '../interfaces/character-sheet';
 export class QuestsComponent {
   posts: any = undefined;
   player: CharacterSheet = {
-    name: "",
+    username: "",
+    characterName: "",
     attack: 0,
     defense: 0,
     health: 0,
     skill: "",
     class: "",
-    bonusAttack: 0,
-    bonusDefense: 0,
-    bonusHealth: 0,
+    // bonusAttack: 0,
+    // bonusDefense: 0,
+    // bonusHealth: 0,
     inventory: [],
-    Quest: ""
+    quest: ""
   };
   questId: string = "";
   origin: string = "";
@@ -62,7 +63,7 @@ export class QuestsComponent {
     if (value) {
       this.response = "Good Luck"
       console.log(this.posts.identifer);
-      this.player.Quest = this.posts.identifer
+      this.player.quest = this.posts.identifer
       this.httpService.updatePlayer(this.posts.identifer)
     }
     else {
