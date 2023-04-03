@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from  '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FetchPlayerPayload } from '../interfaces/fetch-player-payload';
 import { RegistrationPayload } from '../interfaces/registration-payload';
+import {of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ export class ServiceService {
   // add cors
  
   private url = 'http://localhost:5001/api/Monster';
+
+  private url2 =  'https://hehl-api.azurewebsites.net/';
 
  // private url = 'https://testapp-as.azurewebsites.net/WeatherForecast';
 //  private locationurl = 'http://localhost:5001/Location/Royal%20City
@@ -29,7 +32,10 @@ export class ServiceService {
 
   getLocation(key: string) {
     // `Hello, ${name}`
-    return this.http.get(`http://localhost:5001/Location/${key}`)
+  
+  // return this.http.get(`${this.url2}${key}`)
+  return this.http.get(`https://hehl-api.azurewebsites.net/Location/${key}`);
+  //  return this.http.get(`http://localhost:5001/Location/${key}`)
   }
 
   getAdventure(key: string) {
@@ -38,7 +44,8 @@ export class ServiceService {
   }
 
   getPlayer(key: FetchPlayerPayload) {
-    return this.http.post(`http://localhost:5001/Player`, key)
+    return this.http.post(`${this.url2}/Player`, key)
+   // return this.http.post(`http://localhost:5001/Player`, key)
     //return this.http.get(`http://localhost:5001/Location/${key}`)
   }
 
@@ -48,24 +55,22 @@ export class ServiceService {
   }
 
   login(payload: any) {
+    return this.http.post(`${this.url2}/Login`, payload)
     return this.http.post(`http://localhost:5001/Login`, payload)
   }
 
-
-  private data: any;
+  private playerData: any;
 
   updatePlayer(data: any) {
-    this.data = data;
-  }
-
-  setLogin(username: string, id: string) {
-    this.data = {
-      "username": username,
-       "id": id
-    }
+    console.log("Look Here");
+    console.log(data);
+    console.log("Look Here");
+    this.playerData = data;
+    console.log(this.playerData);
   }
 
   retreivePlayer() {
-    return this.data;
+    console.log(this.playerData);
+    return of(this.playerData);
   }
 }
