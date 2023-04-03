@@ -1,54 +1,45 @@
-<h1>{{name}}</h1>
-
-<p>{{data.lDescription}}</p>
-
-<h2>What would you like to do?</h2>
-
 <div *ngIf="decision else decided">
-
-    <button (click)="decisionMade(true)" >Would you like to pursue your quest?</button>
-    <button (click)="decisionMade(false)">I'd like to explore the banks of the water.</button>
-
-    <button (click)="automove()" >auto-move</button>
-
+    <h1>{{name}}</h1>
+    <p>{{data.lDescription}}</p>
+    <h2>What would you like to do?</h2>
+    <div *ngIf="hasQuest" >
+        <button (click)="decisionMade(0)" >{{decisionOption0}}</button>
+    </div>
+    <button (click)="decisionMade(1)">{{decisionOption1}}</button>
+    <button (click)="decisionMade(2)">{{decisionOption2}}</button>
 </div>
 
 <ng-template #decided>
-    <div *ngIf="exploration else Quest">
-        <div *ngIf="explorationChoice else options">
-            <div *ngIf="wait else combat">
-                <div *ngIf="isWaiting else stealth">
-                    <p>{{waitingVariable}}</p>
-                    <p>{{v1}}</p>
-                    <button (click)="acquireTreasure(newItem)" >{{v0}}</button>
-                    <button>{{v2}}</button>
-                    <div *ngIf="shiny">
-                        <p>{{item}}</p>
-                    </div>
-                 
-                </div>
-                <ng-template #stealth>
-                    <p>Stealth the Whale</p>
-                </ng-template>
+    <div *ngIf="option1 else option2" >
+        <div [ngSwitch]="adventureOption">
+            <div *ngSwitchCase="'quest'">
+                 <p>{{data.onArrival}}</p>
+                 <p>{{data.inCombat}}</p>
+                 <p>{{data.afterCombat}}</p>
             </div>
-            <ng-template #combat>
-                <p>Whale Fight Club </p>
-            </ng-template>
-
-        </div>
-        <ng-template #options>
-            <p>{{data.adventure}}</p>
-            <button (click)="explore(1)" >Wait and see what to do</button>
-            <button (click)="explore(2)" >Attempt to sneak past the beast</button>
-            <button (click)="explore(3)" >Fight</button>
-            <button (click)="escape()">Flee.</button>
-        </ng-template>
+            <div *ngSwitchCase="'combat'">
+             <p>Whale Fight Club </p>
+             <app-fight [monsterData]= "data" ></app-fight>
+            </div>
+            <div *ngSwitchCase="'wait'">
+                <app-adventure-booty></app-adventure-booty>
+            </div>
+            <div *ngSwitchCase="'stealth'">
+                 <p>Stealth the Whale</p>
+                 <app-stealth></app-stealth>
+            </div>
+            <div *ngSwitchDefault>
+                 <p>{{data.adventure}}</p>
+                 <button (click)="option1Choices(1)" >Wait and see what to do</button>
+                 <button (click)="option1Choices(2)" >Attempt to sneak past the beast</button>
+                 <button (click)="option1Choices(3)" >Fight</button>
+                 <button (click)="escape('prior_decision')">Flee.</button>
+            </div>
+         </div>
     </div>
 
-    <ng-template #Quest>
-        <p>{{data.onArrival}}</p>
-        <p>{{data.inCombat}}</p>
-        <p>{{data.afterCombat}}</p>
+    <ng-template #option2>
+    <p>exploration option</p>
     </ng-template>
-
+     <button (click)="escape('prior_decision')" >Back</button>
 </ng-template>

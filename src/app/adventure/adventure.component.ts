@@ -11,8 +11,21 @@ import { Inventory } from "../interfaces/inventory"
   styleUrls: ['./adventure.component.css']
 })
 export class AdventureComponent {
+
+  constructor(private httpService: ServiceService, private route: ActivatedRoute) {}
+
+  adventureOption: string = "";
+  counter: number = 0
+  name: string = String(this.route.snapshot.paramMap.get('name'));
+  hasQuest: boolean = false;
   posts: any
-  shiny: boolean = false
+  decision: boolean = true;
+  option1: boolean = true;
+
+decisionOption0 : string = "Would you like to pursue your quest?"
+decisionOption1 : string = "I'd like to explore the water"
+decisionOption2 : string = "I'd like to walk along the port."
+
   data : AdventurePackage = {
     adventure : "",
     afterCombat : "",
@@ -29,31 +42,16 @@ export class AdventureComponent {
     uniqueability: ""
   }
   player: CharacterSheet = {
-    name: "",
+    username: "",
+    characterName: "",
     attack: 0,
     defense: 0,
     health: 0,
     skill: "",
     class: "",
-    bonusAttack: 0,
-    bonusDefense: 0,
-    bonusHealth: 0,
     inventory: [],
-    Quest: ""
+    quest: ""
   };
-  decision: boolean = true;
-  exploration: boolean = false;
-  explorationChoice: boolean = false;
-  wait: boolean = true;
-  isWaiting: boolean = true
-
-  waitingVariable: string = "The Olwarsterin stays still for the moment. It's tentacles be a wagging as it looks around for something.. anything at all to see. After finding nothing it submerrges it's inky body baxk into the depths of the ocean."
-  v1: string = "You spot something on the ground.";
-  v0: string = "Pick it Up";
-  v2: string = "Leave it"
-  item: string = "You find a piece of Olwarstein oil on your hand. Its luke warm and quite nasty. But you should be able to sell it for a pretty bit of coinage. You Pocket it"
-  constructor(private httpService: ServiceService, private route: ActivatedRoute) {}
-  name: string = String(this.route.snapshot.paramMap.get('name'));
 
   ngOnInit() {
     this.httpService.getAdventure(this.name).subscribe(
@@ -68,54 +66,64 @@ export class AdventureComponent {
   getStorageData() {
     let playerData: any = sessionStorage.getItem('player');
     this.player = JSON.parse(playerData);
-    console.log(this.player);
+
+    if (this.player.quest.length > 1) {
+      this.hasQuest = true;
+    }
   }
 
-  decisionMade(value: boolean) {
-      if (value) {
-        this.exploration = false
-      } 
-      else {
-          this.exploration = true;
-      }
-      this.decision = false;
-  }
-
-  explore(value: number) {
-    if (value == 1) {
-      this.wait = true;
-      this.isWaiting = true;
-    } else if (value == 2) {
-      this.wait = true;
-      this.isWaiting = false;
+  decisionMade(value: number) {
+    if (value == 0) {
+      this.option1 = true;
+      this.adventureOption = 'quest';
+    }
+    else if (value == 1) {
+      this.option1 = true;
+   //   this.adventureOption = 'options';
     } else {
-      this.wait = false
+      this.option1 = false;
     }
-    this.explorationChoice = true;
+      this.decision = false;
   }
 
-    escape() {
-
+  option1Choices(value: number) {
+    if (value == 1) {
+      this.adventureOption = 'wait';
     }
-
-    automove() {
-      this.decision = false;
-      this.exploration = true;
-      this.explorationChoice = true;
-      this.wait = true;
-      this.isWaiting = true;
+    else if (value == 2) {
+      this.adventureOption = 'stealth';
+    } else {
+      this.adventureOption = 'combat';
     }
+  }
 
-    newItem: Inventory  = {
-      name: 'Olwarstein Horn.',
-      description: 'A disgustingly fleshy piece of chitinous mass. Useful for crafting magical weaponey.',
-      magical: true,
-      quantity: 100
-  };
-  
-
-    acquireTreasure(value: Inventory) {
-      this.player.inventory.push(value);
-      console.log(this.player.inventory)
+  toggleOptions() {
+    if (this.counter == 4) {
+      this.counter = -1
+    }
+    this.counter++;
+    switch(this.counter) {
+      case 0:
+       
+        break;
+      case 1:
+        this.adventureOption = 'combat';
+        break;
+      case 2:
+        this.adventureOption = 'stealth';
+        break;
+      case 3:
+        this.adventureOption = 'wait';
+        break;
+      case 4:
+        this.adventureOption = 'options';
+        break;
+    }
+  }
+    escape(value: string) {
+      if (value == "prior_decision") {
+        this.decision = true;
+      }
+      this.adventureOption = '';
     }
 }
