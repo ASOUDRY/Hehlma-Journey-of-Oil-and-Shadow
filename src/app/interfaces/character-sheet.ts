@@ -1,14 +1,18 @@
 import { Inventory } from "./inventory"
 
 export interface CharacterSheet {
-    name: string
+    username: string,
+    characterName: string
+    class: string
     attack : number
     defense : number
     health: number
     skill: string
-    class: string
-    bonusAttack: number
-    bonusDefense: number
-    bonusHealth: number
     inventory: Inventory[]
+    quest: string
+
+    // bonusAttack: number
+    // bonusDefense: number
+    // bonusHealth: number
+  
 }

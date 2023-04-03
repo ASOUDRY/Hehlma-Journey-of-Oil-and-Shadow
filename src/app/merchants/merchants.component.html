@@ -1,0 +1,17 @@
+<div *ngIf="notShopping else Shopping">
+    <p>{{data[0].npcInfo}}</p>
+    <p>{{action}}</p>
+
+    <button mat-raised-button color="primary" (click)="onAction('Shopping')"> Shop for goods</button>
+    <button mat-raised-button color="primary" (click)="onAction('Chatting')"> Chat with {{data[0].npcType}} </button>
+    <button mat-raised-button color="primary" (click)="onLeave()"> Leave</button>
+</div>
+<ng-template #Shopping>
+    <div *ngIf="shopping else chatting">
+        <app-shopping (backToOption)="reverse($event)"></app-shopping>
+    </div>    
+    
+    <ng-template #chatting>
+        <app-quests (backToOption)="reverse($event)"></app-quests>
+    </ng-template>
+</ng-template>

@@ -24,6 +24,13 @@ import { DialogueComponent } from './dialogue/dialogue.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { QuestsComponent } from './quests/quests.component';
+import { MerchantsComponent } from './merchants/merchants.component';
+import { LocationComponent } from './location/location.component';
+import { CombatComponent } from './combat/combat.component';
+import { FightComponent } from './fight/fight.component';
+import { StealthComponent } from './stealth/stealth.component';
+import { AdventureBootyComponent } from './adventure-booty/adventure-booty.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +43,13 @@ import { RegistrationComponent } from './registration/registration.component';
     ShoppingComponent,
     LoginComponent,
     RegistrationComponent,
+    QuestsComponent,
+    MerchantsComponent,
+    LocationComponent,
+    CombatComponent,
+    FightComponent,
+    StealthComponent,
+    AdventureBootyComponent,
   ],
   imports: [
     BrowserModule,
