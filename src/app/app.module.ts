@@ -28,6 +28,9 @@ import { QuestsComponent } from './quests/quests.component';
 import { MerchantsComponent } from './merchants/merchants.component';
 import { LocationComponent } from './location/location.component';
 import { CombatComponent } from './combat/combat.component';
+import { FightComponent } from './fight/fight.component';
+import { StealthComponent } from './stealth/stealth.component';
+import { AdventureBootyComponent } from './adventure-booty/adventure-booty.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { CombatComponent } from './combat/combat.component';
     MerchantsComponent,
     LocationComponent,
     CombatComponent,
+    FightComponent,
+    StealthComponent,
+    AdventureBootyComponent,
   ],
   imports: [
     BrowserModule,
