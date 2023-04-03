@@ -1,0 +1,20 @@
+<p>adventure-booty works!</p>
+
+<div *ngIf="lookForSpoils else spoils">
+    <p>{{lose_choice}}</p>
+    <button>{{lose_search_dialogue}}</button>  
+</div>
+<ng-template #spoils>
+    <p> You dun dun dun have a broken tentacle </p>
+    <button> Claim the broken  horn.</button>
+    <button>Move on to next location</button>
+</ng-template>
+
+
+<p>{{waitingVariable}}</p>
+<p>{{v1}}</p>
+<button (click)="acquireTreasure(newItem)" >{{v0}}</button>
+<button>{{v2}}</button>
+<div *ngIf="shiny">
+    <p>{{item}}</p>
+</div>

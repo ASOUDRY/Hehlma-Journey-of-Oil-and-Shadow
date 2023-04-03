@@ -1,0 +1,35 @@
+<div *ngIf="combat_Is_Ongoing else after_battle">
+    <div *ngIf="decision else decided">
+        <p>{{precombat_description}}.</p>
+        <p>{{environmental_description}}</p>
+    </div>
+        
+    <ng-template #decided>
+        <div *ngIf="attack else dodge">
+            <p>{{your_attack}}</p>
+            <p>{{monster_attack}}</p>  
+            <p>{{damaged_dialogue}}</p>     
+        </div>
+        <ng-template #dodge>
+            <p>{{dodge_action}}</p>
+            <p>{{dodged_attack}}</p>
+        </ng-template>
+    </ng-template>
+    <div *ngIf="isdead else still_fighting">
+        <p>You died!</p>
+        <button that leads to log out screen></button>
+    </div>
+    <ng-template #still_fighting>
+        <p>Choose your next action.</p>
+        <button (click)="buttonNavigation('attack')">{{attack_option}}</button>
+        <button (click)="buttonNavigation('dodge')">{{dodge_option}}</button>
+        <button> Escape </button>
+        <div *ngIf="hiddenTactic">
+            <button (click)="secretTactic()" >Secret tactic</button>
+        </div>
+    </ng-template>
+</div>
+
+<ng-template #after_battle>
+    <app-adventure-booty></app-adventure-booty>  
+</ng-template>
