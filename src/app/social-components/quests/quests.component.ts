@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { ServiceService } from '../services/service.service';
+import { ServiceService } from '../../services/service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { CharacterSheet } from '../interfaces/character-sheet';
+import { CharacterSheet } from '../../interfaces/character-sheet';
 
 @Component({
   selector: 'app-quests',

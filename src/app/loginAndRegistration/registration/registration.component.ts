@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ServiceService } from '../services/service.service';
-import { RegistrationPayload } from '../interfaces/registration-payload';
+import { ServiceService } from '../../services/service.service';
+import { RegistrationPayload } from '../../interfaces/registration-payload';
 import { firstValueFrom } from 'rxjs';
 
 @Component({

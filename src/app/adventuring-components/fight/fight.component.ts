@@ -1,8 +1,8 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { CombatDetails } from '../interfaces/combat-details';
-import { ServiceService } from '../services/service.service';
-import { CharacterSheet } from '../interfaces/character-sheet';
-import { AdventurePackage } from '../interfaces/adventure-package';
+import { CombatDetails } from '../../interfaces/combat-details';
+import { ServiceService } from '../../services/service.service';
+import { CharacterSheet } from '../../interfaces/character-sheet';
+import { AdventurePackage } from '../../interfaces/adventure-package';
 
 @Component({
   selector: 'app-fight',

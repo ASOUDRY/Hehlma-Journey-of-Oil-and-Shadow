@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ServiceService } from '../services/service.service';
-import { LoginPayload } from '../interfaces/login-payload';
+import { ServiceService } from '../../services/service.service';
+import { LoginPayload } from '../../interfaces/login-payload';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { FetchPlayerPayload } from '../interfaces/fetch-player-payload';
+import { FetchPlayerPayload } from '../../interfaces/fetch-player-payload';
 
 @Component({
   selector: 'app-login',

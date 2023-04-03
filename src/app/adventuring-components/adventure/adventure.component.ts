@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AdventurePackage } from '../interfaces/adventure-package';
-import { CharacterSheet } from '../interfaces/character-sheet';
-import { ServiceService } from '../services/service.service';
-import { Inventory } from "../interfaces/inventory"
+import { AdventurePackage } from '../../interfaces/adventure-package';
+import { CharacterSheet } from '../../interfaces/character-sheet';
+import { ServiceService } from '../../services/service.service';
+import { Inventory } from "../../interfaces/inventory"
 
 @Component({
   selector: 'app-adventure',

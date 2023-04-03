@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { MainGameComponent } from './main-game/main-game.component';
-import { CharacterCreationComponent } from './character-creation/character-creation.component';
-import { QuestsComponent } from './quests/quests.component';
+import { CharacterCreationComponent } from './loginAndRegistration/character-creation/character-creation.component';
+import { QuestsComponent } from './social-components/quests/quests.component';
 
-import { AdventureComponent } from './adventure/adventure.component';
+import { AdventureComponent } from './adventuring-components/adventure/adventure.component';
 
 const routes: Routes = [
   { path: 'hehl', component:MainGameComponent},

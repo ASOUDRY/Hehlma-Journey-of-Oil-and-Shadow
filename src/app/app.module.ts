@@ -16,21 +16,20 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { MainGameComponent } from './main-game/main-game.component';
 import { HttpClientModule } from  '@angular/common/http';
-import { CharacterCreationComponent } from './character-creation/character-creation.component';
+import { CharacterCreationComponent } from './loginAndRegistration/character-creation/character-creation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AdventureComponent } from './adventure/adventure.component';
-import { DialogueComponent } from './dialogue/dialogue.component';
-import { ShoppingComponent } from './shopping/shopping.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { QuestsComponent } from './quests/quests.component';
-import { MerchantsComponent } from './merchants/merchants.component';
-import { LocationComponent } from './location/location.component';
-import { CombatComponent } from './combat/combat.component';
-import { FightComponent } from './fight/fight.component';
-import { StealthComponent } from './stealth/stealth.component';
-import { AdventureBootyComponent } from './adventure-booty/adventure-booty.component';
+import { AdventureComponent } from './adventuring-components/adventure/adventure.component';
+import { DialogueComponent } from './social-components/dialogue/dialogue.component';
+import { ShoppingComponent } from './social-components/shopping/shopping.component';
+import { LoginComponent } from './loginAndRegistration/login/login.component';
+import { RegistrationComponent } from './loginAndRegistration/registration/registration.component';
+import { QuestsComponent } from './social-components/quests/quests.component';
+import { MerchantsComponent } from './social-components/merchants/merchants.component';
+import { LocationComponent } from './social-components/location/location.component';
+import { FightComponent } from './adventuring-components/fight/fight.component';
+import { StealthComponent } from './adventuring-components/stealth/stealth.component';
+import { AdventureBootyComponent } from './adventuring-components/adventure-booty/adventure-booty.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,6 @@ import { AdventureBootyComponent } from './adventure-booty/adventure-booty.compo
     QuestsComponent,
     MerchantsComponent,
     LocationComponent,
-    CombatComponent,
     FightComponent,
     StealthComponent,
     AdventureBootyComponent,

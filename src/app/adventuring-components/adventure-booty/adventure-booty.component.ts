@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Inventory } from '../interfaces/inventory';
-import { CharacterSheet } from '../interfaces/character-sheet';
+import { Inventory } from '../../interfaces/inventory';
+import { CharacterSheet } from '../../interfaces/character-sheet';
 
 @Component({
   selector: 'app-adventure-booty',
