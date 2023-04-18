@@ -1,19 +1,25 @@
 <div *ngIf="combat_Is_Ongoing else after_battle">
     <div *ngIf="decision else decided">
-        <p>{{precombat_description}}.</p>
-        <p>{{environmental_description}}</p>
+        <p>{{InitialDescripter}}</p>
+        <p>{{monsterData.fightEnviormentDescription1}}.</p>
+        <p>{{monsterData.fightEnviormentDescription2}}</p>
     </div>
         
     <ng-template #decided>
-        <div *ngIf="attack else dodge">
-            <p>{{your_attack}}</p>
-            <p>{{monster_attack}}</p>  
-            <p>{{damaged_dialogue}}</p>     
+        <div [ngSwitch]="action">
+            <div *ngSwitchCase="'attack'">
+                <p>{{your_attack}}</p>
+                <p>{{monster_attack}}</p>  
+                <p>{{damaged_dialogue}}</p>     
+            </div>
+            <div *ngSwitchCase="'dodge'">
+                <p>{{dodge_action}}</p>
+                <p>{{dodged_attack}}</p>
+            </div>
+            <div *ngSwitchCase="'secret'">
+                <p>{{monsterData.uniqueAttackDescription}}</p>
+            </div>
         </div>
-        <ng-template #dodge>
-            <p>{{dodge_action}}</p>
-            <p>{{dodged_attack}}</p>
-        </ng-template>
     </ng-template>
     <div *ngIf="isdead else still_fighting">
         <p>You died!</p>
@@ -31,5 +37,6 @@
 </div>
 
 <ng-template #after_battle>
+    <p>{{monsterData.monsterFlee}}</p>
     <app-adventure-booty></app-adventure-booty>  
 </ng-template>
