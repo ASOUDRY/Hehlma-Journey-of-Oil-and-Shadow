@@ -30,6 +30,9 @@ import { LocationComponent } from './social-components/location/location.compone
 import { FightComponent } from './adventuring-components/fight/fight.component';
 import { StealthComponent } from './adventuring-components/stealth/stealth.component';
 import { AdventureBootyComponent } from './adventuring-components/adventure-booty/adventure-booty.component';
+import { ExplorationComponent } from './adventuring-components/exploration/exploration.component';
+import { TravelComponent } from './travel/travel.component';
+import { QuestEncounterComponent } from './adventuring-components/quest-encounter/quest-encounter.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { AdventureBootyComponent } from './adventuring-components/adventure-boot
     FightComponent,
     StealthComponent,
     AdventureBootyComponent,
+    ExplorationComponent,
+    TravelComponent,
+    QuestEncounterComponent,
   ],
   imports: [
     BrowserModule,
