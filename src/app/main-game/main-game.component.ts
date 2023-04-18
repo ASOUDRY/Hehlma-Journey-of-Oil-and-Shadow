@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { FetchPlayerPayload } from '../interfaces/fetch-player-payload';
 import { CharacterSheet } from '../interfaces/character-sheet';
+import { Location } from '../interfaces/location';
+import { Locationlist } from '../interfaces/locationlist';
 
 @Component({
   selector: 'app-main-game',
@@ -12,16 +14,19 @@ import { CharacterSheet } from '../interfaces/character-sheet';
   styleUrls: ['./main-game.component.css']
 })
 export class MainGameComponent {
-  posts : any;
+  retreiveData: any;
+  posts  : any
+
   data : any
   name: any;
-  tests: any;
+
   message = "";
   action: string = "";
   storedObject: any;
   receive: any;
   undecided = true;
   shopping = false;
+
   player: CharacterSheet = {
     username: "",
     characterName: "",
@@ -32,9 +37,6 @@ export class MainGameComponent {
     skill: "",
     inventory: [],
     quest: ""
-    // bonusAttack: 0,
-    // bonusDefense: 0,
-    // bonusHealth: 0,
   }
 
   m1 : Messages = {
@@ -49,10 +51,11 @@ export class MainGameComponent {
     if (storedObjectString) {
       this.storedObject = JSON.parse(storedObjectString);
     }
-    this.getDataFromApi()
+    this.getPlayerData()
+    this.getLocation();
   }
 
-  async getDataFromApi() {
+  async getPlayerData() {
     try {
       const payload: FetchPlayerPayload = this.storedObject;
       const response = await firstValueFrom(this.httpService.getPlayer(this.storedObject))
@@ -75,10 +78,13 @@ export class MainGameComponent {
     } catch (error) {
       console.log(error);
     }
+   
+  }
+
+  async getLocation() {
     try {
-      const response = await firstValueFrom(this.httpService.getLocation('kap'))
-      this.posts = response; 
-      this.data = this.posts;
+      this.retreiveData = await firstValueFrom(this.httpService.getLocation('kap'))
+      this.posts = this.retreiveData;
     } catch (error) {
       console.log(error);
     }
@@ -104,7 +110,8 @@ export class MainGameComponent {
   }
 
   onRouting() {
-    this.router.navigateByUrl(`/adventure/${this.posts[0].next}`);
+    // encodeURIComponent(inputString)
+    this.router.navigateByUrl(`/proxy/${this.posts[0].nextLocation}`);
   }
 
   ngOnDestroy() {
