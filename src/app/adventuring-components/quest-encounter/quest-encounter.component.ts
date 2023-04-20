@@ -1,5 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { AdventurePackage } from 'src/app/interfaces/adventure-package';
+import { QuestData } from 'src/app/interfaces/QuestData';
+import { ServiceService } from 'src/app/services/service.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { Fight } from 'src/app/interfaces/Fight';
 
 @Component({
   selector: 'app-quest-encounter',
@@ -7,6 +12,34 @@ import { AdventurePackage } from 'src/app/interfaces/adventure-package';
   styleUrls: ['./quest-encounter.component.css']
 })
 export class QuestEncounterComponent {
+  posts: any;
+  name: string = "";
+  constructor(private httpService: ServiceService, private router: Router,  private route: ActivatedRoute) { }
+
+  encounter: QuestData = {
+    questButton1: "",
+    questButton2: "",
+    questdialogue1: "",
+    questdialogue2: "",
+    questdialogue3: ""
+  };
+
+  fightData: Fight = {
+    monsterName: "",
+    hitpoints: 0 ,
+    attack: 0,
+    defense: 0,
+    monsterAttack1: "",
+    monsterAttack2: "",
+    dodgeAttack: "",
+    monsterFlee: "",
+    description1: "",
+    description2: "",
+    description3: "",
+    uniqueAttackDescription: ""
+  };
+
+
   questButton1: string = "";
   questButton2: string =  "";
   questDialogue: string = ""
@@ -17,7 +50,7 @@ export class QuestEncounterComponent {
   prechoice: boolean = true;
   choice: string = "";
 
-  @Input() data: AdventurePackage = {
+  @Input() data: any = {
     questButton1: "",
     questButton2: "",
     adventureOption1: '',
@@ -52,9 +85,26 @@ export class QuestEncounterComponent {
   ngOnInit() {
     this.questButton1 = this.data.questButton1;
     this.questButton2 = this.data.questButton2;
-    this.questDialogue = this.data.questdialogue1
+    this.questDialogue = this.data.questdialogue1;
+
+    this.route.paramMap.subscribe(params => {
+      const key = params.get('name');
+      this.name =   String (key);
+      console.log(this.name);
+      console.log(this.data);
+    })
+
+    this.getApiData();
+
   }
 
+  async getApiData() {
+    this.posts = await firstValueFrom(this.httpService.getQuestEncounter(this.name));
+    this.encounter = this.posts;
+    console.log(this.encounter);
+
+    this.posts = this.httpService.packageParser(this.posts, 1);
+  }
 
   choose(input: number) {
     if (input == 1) {  

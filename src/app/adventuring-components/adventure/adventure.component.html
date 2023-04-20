@@ -1,32 +1,32 @@
 <div *ngIf="decision else decided">
-    <h1>{{data.locationName}}</h1>
-    <p>{{data.locationDescription}}</p>
+    <h1>{{adventureData.locationName}}</h1>
+    <p>{{adventureData.locationDescription}}</p>
     <h2>What would you like to do?</h2>
     <div *ngIf="hasQuest" >
-        <button (click)="decisionMade(0)" >{{data.questName}}</button>
+        <button (click)="decisionMade(0)" >{{adventureData.questName}}</button>
     </div>
-    <button (click)="decisionMade(1)">{{data.adventureOption1}}</button>
-    <button (click)="decisionMade(2)">{{data.adventureOption2}}</button>
+    <button (click)="decisionMade(1)">{{adventureData.adventureOption1}}</button>
+    <button (click)="decisionMade(2)">{{adventureData.adventureOption2}}</button>
 </div>
 
 <ng-template #decided>
     <div *ngIf="option1 else option2" >
         <div [ngSwitch]="adventureOption">
             <div *ngSwitchCase="'quest'">
-                <app-quest-encounter [data]="data"   ></app-quest-encounter>
+                <app-quest-encounter [data]="questData"   ></app-quest-encounter>
               
             </div>
             <div *ngSwitchCase="'combat'">
-             <app-fight [monsterData]= "data" ></app-fight>
+             <app-fight [monsterData]= "fightData" ></app-fight>
             </div>
             <div *ngSwitchCase="'wait'">
                 <app-adventure-booty></app-adventure-booty>
             </div>
             <div *ngSwitchCase="'stealth'">
-                 <app-stealth [monsterData]= "data" ></app-stealth>
+                 <app-stealth [stealthData]= "stealthData" ></app-stealth>
             </div>
             <div *ngSwitchDefault>
-                 <p>{{data.enviormentDescription}}</p>
+                 <p>{{adventureData.enviormentalDescription}}</p>
                  <button (click)="option1Choices(1)">{{fightOption0}}</button>
                  <button (click)="option1Choices(2)">{{fightOption1}}</button>
                  <button (click)="option1Choices(3)">{{fightOption2}}</button>
@@ -36,7 +36,7 @@
     </div>
 
     <ng-template #option2>
-    <app-exploration [data]= "data"  ></app-exploration>
+    <app-exploration [data]= "adventureData"  ></app-exploration>
     </ng-template>
      <button (click)="escape('prior_decision')" >Back</button>
 </ng-template>

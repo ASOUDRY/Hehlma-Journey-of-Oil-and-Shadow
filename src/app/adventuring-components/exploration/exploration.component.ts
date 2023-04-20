@@ -9,7 +9,7 @@ import { AdventurePackage } from 'src/app/interfaces/adventure-package';
 export class ExplorationComponent {
 
 
-  @Input() data: AdventurePackage = {
+  @Input() data: any = {
     questButton1: "",
     questButton2: "",
     adventureOption1: '',

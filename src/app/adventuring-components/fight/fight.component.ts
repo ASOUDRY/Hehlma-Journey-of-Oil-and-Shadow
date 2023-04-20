@@ -2,8 +2,9 @@ import { Component, Input, SimpleChanges } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { CharacterSheet } from '../../interfaces/character-sheet';
 import { AdventurePackage } from '../../interfaces/adventure-package';
-import { QuestEncounter } from 'src/app/interfaces/quest-encounter';
+import { QuestData } from 'src/app/interfaces/QuestData';
 import { firstValueFrom } from 'rxjs';
+import { Fight } from 'src/app/interfaces/Fight';
 
 @Component({
   selector: 'app-fight',
@@ -16,57 +17,27 @@ export class FightComponent {
 
   constructor(private storageService: ServiceService) {};
 
-  @Input() monsterData: AdventurePackage = {
-    questButton1: "",
-    questButton2: "",
-    adventureOption1: '',
-    adventureOption2: '',
+  @Input() monsterData: Fight = {
+    monsterName: "",
+    hitpoints: 0 ,
     attack: 0,
-    bootyReward: '',
     defense: 0,
-    dodgeAttack: '',
-    enviormentDescription: '',
-    exploration1: '',
-    exploration2: '',
-    exploration3: '',
-    fightEnviormentDescription1: '',
-    fightEnviormentDescription2: '',
-    hitpoints: 0,
-    locationDescription: '',
-    locationName: '',
-    monsterAttack1: '',
-    monsterAttack2: '',
-    monsterFlee: '',
-    monsterName: '',
-    nextLocation: '',
-    questName: '',
-    questdialogue1: '',
-    questdialogue2: '',
-    questdialogue3: '',
-    stealth1: '',
-    stealth2: '',
-    uniqueAttackDescription: '',
+    monsterAttack1: "",
+    monsterAttack2: "",
+    dodgeAttack: "",
+    monsterFlee: "",
+    description1: "",
+    description2: "",
+    description3: "",
+    uniqueAttackDescription: ""
   };
 
-  encounter: QuestEncounter = {
-    monsterName: '',
-    hitpoints: 0,
-    attack: 0,
-    defense: 0,
-    MonsterAttack1: '',
-    MonsterAttack2: '',
-    dodgeAttack: '',
-    MonsterFlee: '',
-    uniqueAction: '',
-    questCombat1: '',
-    questCombat2: '',
-    questCombat3: '',
-    questdialogue1: '',
-    questdialogue2: '',
-    questdialogue3: '',
-    questButton1: '',
-    questButton2: '',
-    questName: '',
+  encounter: QuestData = {
+    questButton1: "",
+    questButton2: "",
+    questdialogue1: "",
+    questdialogue2: "",
+    questdialogue3: ""
   }
 
   player: CharacterSheet = {

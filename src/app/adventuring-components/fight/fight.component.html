@@ -1,8 +1,9 @@
 <div *ngIf="combat_Is_Ongoing else after_battle">
     <div *ngIf="decision else decided">
-        <p>{{InitialDescripter}}</p>
-        <p>{{monsterData.fightEnviormentDescription1}}.</p>
-        <p>{{monsterData.fightEnviormentDescription2}}</p>
+   
+        <p>{{monsterData.description1}}</p>
+        <p>{{monsterData.description2}}</p>
+        <p>{{monsterData.description3}}</p>
     </div>
         
     <ng-template #decided>

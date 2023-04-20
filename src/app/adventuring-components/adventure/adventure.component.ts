@@ -5,6 +5,9 @@ import { CharacterSheet } from '../../interfaces/character-sheet';
 import { ServiceService } from '../../services/service.service';
 import { Inventory } from "../../interfaces/inventory"
 import { firstValueFrom } from 'rxjs';
+import { Fight } from 'src/app/interfaces/Fight';
+import { QuestData } from 'src/app/interfaces/QuestData';
+import { StealthData } from 'src/app/interfaces/StealthData';
 
 @Component({
   selector: 'app-adventure',
@@ -13,13 +16,28 @@ import { firstValueFrom } from 'rxjs';
 })
 export class AdventureComponent {
 
+  fight: Fight = {
+    monsterName: "",
+    hitpoints: 0 ,
+    attack: 0,
+    defense: 0,
+    monsterAttack1: "",
+    monsterAttack2: "",
+    dodgeAttack: "",
+    monsterFlee: "",
+    description1: "",
+    description2: "",
+    description3: "",
+    uniqueAttackDescription: ""
+  }
+
   constructor(private httpService: ServiceService, private route: ActivatedRoute) {}
 
   adventureOption: string = "";
   counter: number = 0
   name: string = "";
   hasQuest: boolean = true;
-  posts: any
+  anyData: any
   decision: boolean = true;
   option1: boolean = true;
 
@@ -27,37 +45,43 @@ fightOption0 : string = "Wait and see what to do"
 fightOption1 : string = "Attempt to sneak past the beast"
 fightOption2 : string = "Fight"
 
-  data: AdventurePackage = {
+  adventureData: AdventurePackage = {
+    locationName: "",
+    locationDescription: "",
+    adventureOption1: "",
+    adventureOption2: "",
+    exploration1: "",
+    exploration2: "",
+    exploration3: "",
+    enviormentalDescription: "",
+    nextLocation: "",
+    questName: ""
+  }
+  questData: QuestData = {
     questButton1: "",
     questButton2: "",
-    adventureOption1: '',
-    adventureOption2: '',
+    questdialogue1: "",
+    questdialogue2: "",
+    questdialogue3: ""
+  }
+  fightData: Fight = {
+    monsterName: "",
+    hitpoints: 0 ,
     attack: 0,
-    bootyReward: '',
     defense: 0,
-    dodgeAttack: '',
-    enviormentDescription: '',
-    exploration1: '',
-    exploration2: '',
-    exploration3: '',
-    fightEnviormentDescription1: '',
-    fightEnviormentDescription2: '',
-    hitpoints: 0,
-    locationDescription: '',
-    locationName: '',
-    monsterAttack1: '',
-    monsterAttack2: '',
-    monsterFlee: '',
-    monsterName: '',
-    nextLocation: '',
-    questName: '',
-    questdialogue1: '',
-    questdialogue2: '',
-    questdialogue3: '',
-    stealth1: '',
-    stealth2: '',
-    uniqueAttackDescription: '',
-  };
+    monsterAttack1: "",
+    monsterAttack2: "",
+    dodgeAttack: "",
+    monsterFlee: "",
+    description1: "",
+    description2: "",
+    description3: "",
+    uniqueAttackDescription: ""
+  }
+  stealthData: StealthData = {
+    stealth1: "",
+    stealth2: ""
+  }
 
   player: CharacterSheet = {
     username: "",
@@ -82,13 +106,23 @@ fightOption2 : string = "Fight"
   }
 
   async getDataFromApi() {
-    console.log(this.name);
-    this.posts = await firstValueFrom(this.httpService.getAdventure(this.name));
-    this.data = this.posts;
-    this.posts = await firstValueFrom(this.httpService.getAdventure(this.name));
-    this.data = this.posts;
-    // console.log(response);
+    this.anyData = await firstValueFrom(this.httpService.getAdventure(this.name));
+    console.log(this.anyData);
+    
+    this.anyData = this.httpService.packageParser(this.anyData, 0);
+
+    this.adventureData = this.anyData[0];
+    
+    this.fightData = this.anyData[1];
+
+    this.questData = this.anyData[2];
+
+    this.stealthData = this.anyData[4];
+    console.log(this.anyData);
+
   }
+
+
 
   getStorageData() {
     let playerData: any = sessionStorage.getItem('player');
