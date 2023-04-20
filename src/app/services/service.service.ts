@@ -63,4 +63,75 @@ export class ServiceService {
     console.log(this.playerData);
     return of(this.playerData);
   }
+
+  
+packageParser(data: any, typeOFData: number ) {
+
+    if (typeOFData == 0) {
+     return [
+      {
+        locationName: data.locationName,
+        locationDescription: data.locationDescription,
+        adventureOption1: data.adventureOption1,
+        adventureOption2: data.adventureOption2,
+        exploration1: data.exploration1,
+        exploration2: data.exploration2,
+        exploration3: data.exploration3,
+        enviormentalDescription: data.enviormentalDescription,
+        nextLocation: data.nextLocation,
+        questName: data.questName
+      },
+      {
+        fightDescription1: data.fightDescription1,
+        fightDescription2: data.fightDescription2,
+        fightDescription3: data.fightDescription3,
+      },
+      {
+        questButton1: data.questButton1,
+        questButton2: data.questButton2,
+        questdialogue1: data.questdialogue1,
+        questdialogue2: data.questdialogue2,
+        questdialogue3: data.questdialogue3,
+      }, 
+      {
+        questCombatDescription1: data.questCombatDescription1,
+        questCombatDescription2: data.questCombatDescription2,
+        questCombatDescription3: data.questCombatDescription3,
+      }, 
+      {
+        stealth1: data.stealth1,
+        stealth2: data.stealth2
+      }
+      // monsterAttack: data.monsterAttack1
+    ]
+     }
+     else if (typeOFData == 1) {
+      return {
+        // attack: data.attack,
+        // defense: data.defense,
+        // dodgeAttack: data.dodgeAttack,
+        // enviormentDescription: data.enviormentDescription,
+        // fightEnviormentDescription1: data.fightEnviormentDescription1,
+        // fightEnviormentDescription2: data.fightEnviormentDescription2,
+        // hitpoints: data.hitpoints,
+        // locationDescription: data.locationDescription,
+        // monsterAttack1: data.mon,
+        // monsterAttack2: '',
+        // monsterFlee: '',
+        // monsterName: '',
+        // uniqueAttackDescription: '',
+        // questCombat1: '',
+        // questCombat2: '',
+        // questCombat3: '',
+        
+      }
+     }
+     else {
+      return {}
+     }
+} 
+
+
+
+
 }
