@@ -9,12 +9,11 @@ import { TravelComponent } from './travel/travel.component';
 import { AdventureComponent } from './adventuring-components/adventure/adventure.component';
 
 const routes: Routes = [
-  { path: 'hehl', component:MainGameComponent},
+  { path: 'settlement/:location', component:MainGameComponent},
   { path: 'character', component:CharacterCreationComponent},
   { path: ':locations/:origin/quests', component:QuestsComponent},
-  // { path: 'adventure/:name', component:AdventureComponent},
-  { path: 'proxy/:name', component:AdventureComponent},
-  { path: 'traveling', component:TravelComponent},
+  { path: 'adventure/:name', component:AdventureComponent},
+  { path: ':direction/:name', component:TravelComponent},
   { path: '**', component:LandingPageComponent},
 ];
 
