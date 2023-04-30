@@ -1,8 +1,10 @@
-<p>Where would you like to travel now?</p>
-
-<button>Next Location</button>
-<button>Previous Location</button>
-
-<div class="router">
-    <a class="button" routerLink="/adventure/Stirring%20Sea">Back </a>
+<div [ngSwitch]="travel">
+    <div *ngSwitchCase="'retreatingTo'">
+        <p>{{data.para1}}</p>
+    </div>
+    <div *ngSwitchCase="'advancingToward'">
+        <p>{{data.para2}}</p>
+    </div>
 </div>
+  
+<button (click)="navigate()"  > Continue onto {{destination}}</button>
