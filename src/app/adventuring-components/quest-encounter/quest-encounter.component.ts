@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AdventurePackage } from 'src/app/interfaces/adventure-package';
 import { QuestData } from 'src/app/interfaces/QuestData';
 import { ServiceService } from 'src/app/services/service.service';
@@ -12,11 +12,16 @@ import { Fight } from 'src/app/interfaces/Fight';
   styleUrls: ['./quest-encounter.component.css']
 })
 export class QuestEncounterComponent {
-  posts: any;
-  name: string = "";
   constructor(private httpService: ServiceService, private router: Router,  private route: ActivatedRoute) { }
 
-  encounter: QuestData = {
+   @Output() navigationEmitter = new EventEmitter<number>();
+  
+  navigateOutofQuest (value: number) {
+    console.log("quest")
+    this.navigationEmitter.emit(value);
+  }
+
+  @Input()  encounter: QuestData = {
     questButton1: "",
     questButton2: "",
     questdialogue1: "",
@@ -24,7 +29,7 @@ export class QuestEncounterComponent {
     questdialogue3: ""
   };
 
-  fightData: Fight = {
+  @Input()  fightData: Fight = {
     monsterName: "",
     hitpoints: 0 ,
     attack: 0,
@@ -39,71 +44,47 @@ export class QuestEncounterComponent {
     uniqueAttackDescription: ""
   };
 
+  @Input() combat : any = {
+    hiddenTactic: false,
+    attack_option : "You bravely attack with your blade.",
+    attackDescription: "Your blade strikes the zombie, slicing it's flesh, oily mass spilling frtom its freshly made wound.",
+    dodge_action: "",
+    dodge_option : "There is no where to hide. You must stand and fight",
+    rewardType: "quest"
+    }
+
+    @Input() bootyObject: any = {
+      string1: "With the zombie dead, you are able to look around the area once more You find something a little odd in the ground. Reaching into the water you pull out a half eaten mosst looking hand. Around its wrists you find a bracelet with a locket. Flicking open the locket You see the man who gave you the quest. You pocket the locket. Looks like it was all that was left of the girl.",
+      string2: "Take locket with you",
+      string3: "You take the locket woth you as proof you found her body. Hopefully it wll give the old man some sense of closure.",
+      string4: "Head on Back.",
+      item: {
+        name: 'Girls bloody locket.',
+        description: 'A bloody locket of the gross variety.',
+        magical: false,
+        quantity: 1
+    },
+  };
+
 
   questButton1: string = "";
   questButton2: string =  "";
+  questButton3: string = "";
+  questButton4: string =  "";
   questDialogue: string = ""
   placeholder: string = "abandon the search";
 
-  notBackTracking: boolean = true;
- 
   prechoice: boolean = true;
   choice: string = "";
-
-  @Input() data: any = {
-    questButton1: "",
-    questButton2: "",
-    adventureOption1: '',
-    adventureOption2: '',
-    attack: 0,
-    bootyReward: '',
-    defense: 0,
-    dodgeAttack: '',
-    enviormentDescription: '',
-    exploration1: '',
-    exploration2: '',
-    exploration3: '',
-    fightEnviormentDescription1: '',
-    fightEnviormentDescription2: '',
-    hitpoints: 0,
-    locationDescription: '',
-    locationName: '',
-    monsterAttack1: '',
-    monsterAttack2: '',
-    monsterFlee: '',
-    monsterName: '',
-    nextLocation: '',
-    questName: '',
-    questdialogue1: '',
-    questdialogue2: '',
-    questdialogue3: '',
-    stealth1: '',
-    stealth2: '',
-    uniqueAttackDescription: '',
-  };
-
+  
   ngOnInit() {
-    this.questButton1 = this.data.questButton1;
-    this.questButton2 = this.data.questButton2;
-    this.questDialogue = this.data.questdialogue1;
-
-    this.route.paramMap.subscribe(params => {
-      const key = params.get('name');
-      this.name =   String (key);
-      console.log(this.name);
-      console.log(this.data);
-    })
-
-    this.getApiData();
-
-  }
-
-  async getApiData() {
-    this.posts = await firstValueFrom(this.httpService.getQuestEncounter(this.name));
-    this.encounter = this.posts;
+    this.questButton1 = this.encounter.questButton1;
+    this.questButton2 = this.encounter.questButton2;
+    this.questButton3 = "Continue on.";
+    this.questButton4 = "Look elsewhere.";
+    this.questDialogue = this.encounter.questdialogue1;
     console.log(this.encounter);
-
-    this.posts = this.httpService.packageParser(this.posts, 1);
+    console.log(this.bootyObject);
   }
 
   choose(input: number) {
@@ -129,16 +110,15 @@ export class QuestEncounterComponent {
       this.choice = "combat"
     } else if (input == 2) {
       this.prechoice = true;
-      this.questDialogue = this.data.questdialogue3
+      this.questDialogue = this.encounter.questdialogue3;
     }
   }
 
   back() {
     this.prechoice = true;
+    console.log(this.questDialogue);
+    console.log(this.encounter.questdialogue3);
+    this.questDialogue = this.encounter.questdialogue3;
+    this.questButton1 = "Try exploring the blood trail again?"
   }
-
-  doneQuest() {
-
-  }
-
 }

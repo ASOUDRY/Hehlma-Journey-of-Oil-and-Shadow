@@ -1,30 +1,27 @@
 <div *ngIf="prechoice else decided">
     <p>{{questDialogue}}</p>
-    <button (click)="choose(1)" >{{data.questButton1}}</button>
-    <button (click)="choose(2)" >{{data.questButton2}}</button>
+    <button (click)="choose(1)" >{{questButton1}}</button>
+    <button [disabled]="true" (click)="choose(2)" >{{questButton2}}</button>
 </div>
 
 <ng-template #decided>
     <div [ngSwitch]="choice">
         <div *ngSwitchCase="'combat'">
-            <app-fight [monsterData]= "fightData" ></app-fight>
-           </div>
-           <div *ngSwitchCase="'option1'">
-               <p>{{data.questdialogue2}}</p>
-           
-               <button (click)="potentialCombat(1)" >{{questButton1}}</button>
-               <div *ngIf="notBackTracking else yes">
-                    <button (click)="potentialCombat(2)" >{{questButton2}}</button>
-               </div>
-               <ng-template #yes>
-                    <button (click)="doneQuest()" >{{placeholder}}</button>
-               </ng-template>
-               
-           </div>
-           <div *ngSwitchCase="'option2'">
-               <p>{{data.questdialogue3}}</p>
-           </div>
+            <app-fight 
+            (navigationEmitter)="navigateOutofQuest($event)" 
+            [combat]="combat"  
+            [monsterData]= "fightData" 
+            [bootyObject]="bootyObject"
+            ></app-fight>
+        </div>
+        <div *ngSwitchCase="'option1'">
+            <p>{{encounter.questdialogue2}}</p>
+            <button (click)="potentialCombat(1)" >{{questButton3}}</button>
+            <button [disabled]="true" (click)="potentialCombat(2)" >{{questButton4}}</button>     
+        </div>
+            <div *ngSwitchCase="'option2'">
+            <p>{{encounter.questdialogue3}}</p>
+        </div>
     </div>
-   <button (click)="back()" >Back to prechoice</button>
+   <!-- <button (click)="back()">Back track and regroup. </button> -->
 </ng-template>
-
