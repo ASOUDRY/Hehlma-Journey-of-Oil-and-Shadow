@@ -6,6 +6,7 @@ export interface Fight {
     monsterAttack1: string;
     monsterAttack2: string;
     dodgeAttack: string;
+    // dodgedAttack: string;
     monsterFlee: string;
     description1: string;
     description2: string;
