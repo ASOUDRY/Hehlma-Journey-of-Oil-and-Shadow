@@ -1,18 +1,10 @@
-<div *ngIf="lookForSpoils else spoils">
-
-    <button>{{lose_search_dialogue}}</button>  
-</div>
-<ng-template #spoils>
-    <p> You dun dun dun have a broken tentacle </p>
-    <button> Claim the broken  horn.</button>
-    <button>Move on to next location</button>
-</ng-template>
-
-
-<p>{{waitingVariable}}</p>
-<p>{{v1}}</p>
-<button (click)="acquireTreasure(newItem)" >{{v0}}</button>
-<button>{{v2}}</button>
-<div *ngIf="shiny">
-    <p>{{item}}</p>
-</div>
+    <p>{{bootyObject.string1}}</p>
+    <button (click)="acquireTreasure(bootyObject.item)">{{bootyObject.string2}}</button>
+    <div *ngIf="shiny">
+           <p>{{bootyObject.string3}}</p>
+       
+    </div>
+    <button
+    (click)="navigateOutofBooty(0)"
+    >{{bootyObject.string4}}</button>
+    <button (click)="navigateOutofBooty(1)">Continue exploring</button>

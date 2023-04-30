@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Inventory } from '../../interfaces/inventory';
 import { CharacterSheet } from '../../interfaces/character-sheet';
+import { NumberInput } from '@angular/cdk/coercion';
 
 @Component({
   selector: 'app-adventure-booty',
@@ -9,6 +10,16 @@ import { CharacterSheet } from '../../interfaces/character-sheet';
 })
 export class AdventureBootyComponent {
 
+  ngOnInit() {
+    console.log(this.bootyObject);
+  }
+
+  @Output() navigationEmitter = new EventEmitter<number>();
+
+  navigateOutofBooty(value: number) {
+    this.navigationEmitter.emit(value);
+  }
+    shiny: boolean = false
     player: CharacterSheet = {
     username: "",
     characterName: "",
@@ -17,34 +28,27 @@ export class AdventureBootyComponent {
     health: 0,
     skill: "",
     class: "",
-    // bonusAttack: 0,
-    // bonusDefense: 0,
-    // bonusHealth: 0,
     inventory: [],
     quest: ""
   };
-  lookForSpoils: boolean = true;
 
-  lose_choice: string = "It decides to retreat deciding your not worth it.";
-lose_search_dialogue: string = "Scavenge for materials"
+@Input() whichBooty: string = "other";
 
-  waitingVariable: string = "The Olwarsterin stays still for the moment. It's tentacles be a wagging as it looks around for something.. anything at all to see. After finding nothing it submerrges it's inky body baxk into the depths of the ocean."
-
-   v1: string = "You spot something on the ground.";
-  v0: string = "Pick it Up";
-  v2: string = "Leave it"
-    item: string = "You find a piece of Olwarstein oil on your hand. Its luke warm and quite nasty. But you should be able to sell it for a pretty bit of coinage. You Pocket it"
-      shiny: boolean = false
-
-         acquireTreasure(value: Inventory) {
-      this.player.inventory.push(value);
-      console.log(this.player.inventory)
-    }
-
-    newItem: Inventory  = {
-    name: 'Olwarstein Horn.',
-    description: 'A disgustingly fleshy piece of chitinous mass. Useful for crafting magical weaponey.',
-    magical: true,
-    quantity: 100
+@Input() bootyObject: any = {
+    string1: "",
+    string2: "",
+    string3: "",
+    string4: "",
+    item: {
+      name: '',
+      description: '',
+      magical: true,
+      quantity: 100
+  },
 };
+
+acquireTreasure(value: Inventory) {
+    this.shiny = true;
+    this.player.inventory.push(value);
+  }
 }
