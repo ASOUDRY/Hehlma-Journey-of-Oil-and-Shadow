@@ -13,11 +13,11 @@
     <div *ngIf="option1 else option2" >
         <div [ngSwitch]="adventureOption">
             <div *ngSwitchCase="'quest'">
-                <app-quest-encounter [data]="questData"   ></app-quest-encounter>
+                <app-quest-encounter (navigationEmitter)="navigateToNewLocation($event)" [encounter]="questData" [fightData]="questFightData"   ></app-quest-encounter>
               
             </div>
             <div *ngSwitchCase="'combat'">
-             <app-fight [monsterData]= "fightData" ></app-fight>
+             <app-fight (navigationEmitter)="navigateToNewLocation($event)" [combat]="combat" [monsterData]= "fightData" ></app-fight>
             </div>
             <div *ngSwitchCase="'wait'">
                 <app-adventure-booty></app-adventure-booty>
@@ -27,7 +27,9 @@
             </div>
             <div *ngSwitchDefault>
                  <p>{{adventureData.enviormentalDescription}}</p>
-                 <button (click)="option1Choices(1)">{{fightOption0}}</button>
+                 <h2>What will you do?</h2>
+                 <button [disabled]="true"
+                 (click)="option1Choices(1)">{{fightOption0}}</button>
                  <button (click)="option1Choices(2)">{{fightOption1}}</button>
                  <button (click)="option1Choices(3)">{{fightOption2}}</button>
                  <button (click)="escape('prior_decision')">Flee.</button>
@@ -38,5 +40,5 @@
     <ng-template #option2>
     <app-exploration [data]= "adventureData"  ></app-exploration>
     </ng-template>
-     <button (click)="escape('prior_decision')" >Back</button>
+     <!-- <button (click)="escape('prior_decision')" >Back</button> -->
 </ng-template>
