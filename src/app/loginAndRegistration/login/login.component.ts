@@ -41,7 +41,7 @@ async submit() {
       }
     
 sessionStorage.setItem("LoginCredentials", JSON.stringify(objectToken));
-    this.router.navigateByUrl('/hehl')
+    this.router.navigateByUrl('settlement/kap')
 }
 
 }
