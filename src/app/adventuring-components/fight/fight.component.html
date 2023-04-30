@@ -1,43 +1,49 @@
-<div *ngIf="combat_Is_Ongoing else after_battle">
     <div *ngIf="decision else decided">
-   
         <p>{{monsterData.description1}}</p>
         <p>{{monsterData.description2}}</p>
         <p>{{monsterData.description3}}</p>
     </div>
         
     <ng-template #decided>
-        <div [ngSwitch]="action">
+        <div [ngSwitch]="decisionAction">
             <div *ngSwitchCase="'attack'">
-                <p>{{your_attack}}</p>
+                <p>{{combat.attackDescription}}</p>
+                <p>You deal {{damage_dealt}} damage</p>
                 <p>{{monster_attack}}</p>  
-                <p>{{damaged_dialogue}}</p>     
+                <p> You take {{damage_taken}} damage</p>
+                <p>Your health is {{this.player.health}}</p>
+                <!-- <p>{{damaged_dialogue}}</p>      -->
             </div>
             <div *ngSwitchCase="'dodge'">
-                <p>{{dodge_action}}</p>
-                <p>{{dodged_attack}}</p>
+                <p>{{combat.dodge_action}}</p>
+                <p>{{monsterData.dodgeAttack}}</p>
             </div>
             <div *ngSwitchCase="'secret'">
                 <p>{{monsterData.uniqueAttackDescription}}</p>
             </div>
         </div>
     </ng-template>
-    <div *ngIf="isdead else still_fighting">
-        <p>You died!</p>
-        <button that leads to log out screen></button>
-    </div>
-    <ng-template #still_fighting>
-        <p>Choose your next action.</p>
-        <button (click)="buttonNavigation('attack')">{{attack_option}}</button>
-        <button (click)="buttonNavigation('dodge')">{{dodge_option}}</button>
-        <button> Escape </button>
-        <div *ngIf="hiddenTactic">
-            <button (click)="secretTactic()" >Secret tactic</button>
-        </div>
-    </ng-template>
-</div>
 
-<ng-template #after_battle>
-    <p>{{monsterData.monsterFlee}}</p>
-    <app-adventure-booty></app-adventure-booty>  
-</ng-template>
+    <div [ngSwitch]="options">
+        <div *ngSwitchCase="'dead'">
+            <p>You died!</p>
+            <button>Button that leads to log out screen></button>
+        </div>
+        <div *ngSwitchCase="'afterCombat'">
+            <p>{{monsterData.monsterFlee}}</p>
+            <app-adventure-booty  
+                (navigationEmitter)="navigateOutofFight($event)" 
+                [bootyObject]="bootyObject" 
+                [whichBooty]="combat.rewardType">
+            </app-adventure-booty>  
+        </div>
+        <div *ngSwitchDefault>
+            <p>Choose your next action.</p>
+            <button (click)="combatNavigation('attack')">{{combat.attack_option}}</button>
+            <button [disabled]="canYouDodge" (click)="combatNavigation('dodge')">{{combat.dodge_option}}</button>
+            <button> Escape </button>
+            <div *ngIf="combat.hiddenTactic">
+                <button (click)="secretTactic()" >Secret tactic</button>
+            </div>
+        </div> 
+    </div>
