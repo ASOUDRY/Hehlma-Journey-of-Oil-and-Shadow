@@ -11,13 +11,34 @@ export class LocationComponent {
   undecided: boolean = true;
   Drinking: boolean = false;
 
-  @Input() data: any;
+  @Input() data: any = {
+    aInfo: "",
+    aName: "",
+    lDescription: "",
+    lName: "",
+    nextLocation: "",
+    previousLocation: "",
+    message: "",
+    action: "",
+    npc: [
+      {
+        npcInfo: "Argo",
+        npcName: "Lorem Ipsum",
+        npcType: "QuestGiver",
+      },
+      {
+        npcInfo: "LArgo",
+        npcName: "Lorem Ipsum Delta",
+        npcType: "Merchant",
+      },
+    ]
+  }
 
   constructor(private httpService: ServiceService, private router: Router) { }
 
 
   ngOnInit() {
-    console.log(this.data[0].aName);
+   
   }
 
   @Output() backToOption = new EventEmitter<void>();

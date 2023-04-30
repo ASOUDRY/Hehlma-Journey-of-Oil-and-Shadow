@@ -1,8 +1,8 @@
-<p>{{data[0].aName}}</p>
+<p>{{data.aName}}</p>
 <div *ngIf="undecided else other">
 
 
-<p>{{data[0].aInfo}}</p>
+<p>{{data.aInfo}}</p>
 
 <button mat-raised-button color="primary" (click)="drinking(false)"> Chat with some Folks</button>
 <button mat-raised-button color="primary" (click)="drinking(true)"> Buy Drinks</button>
@@ -15,13 +15,13 @@
         <p>You chuck back all the beer you can stomache and promptly pass out like a ass.</p>
         <p>While your doing that, you over hear some fellas talking about them</p>
 
-        <button mat-raised-button color="primary" (click)="questing(data[0].aName)">I'd like to eavesdrop..</button>
+        <button mat-raised-button color="primary" (click)="questing(data.aName)">I'd like to eavesdrop..</button>
         <button mat-raised-button color="primary" (click)="drinking(false)"> I'll mind my own business</button>
     </div>
     <ng-template #chatting>
         <p>Wanna hear some rumors laddie</p>
         <button mat-raised-button color="primary" (click)="drinking(false)">Nah I'm gonna fuck off.</button>
-        <button mat-raised-button color="primary" (click)="questing(data[0].aName)"> Enthusistic nodding</button>
+        <button mat-raised-button color="primary" (click)="questing(data.aName)"> Enthusistic nodding</button>
     </ng-template>
 
 </ng-template>
