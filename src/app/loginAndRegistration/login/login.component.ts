@@ -44,4 +44,9 @@ sessionStorage.setItem("LoginCredentials", JSON.stringify(objectToken));
     this.router.navigateByUrl('settlement/kap')
 }
 
+// ngOnDestoy() {
+//   sessionStorage.setItem("Whateveryouwant", value)
+// }
+
+
 }
